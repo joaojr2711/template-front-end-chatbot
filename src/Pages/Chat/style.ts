@@ -5,7 +5,7 @@ export const Container = styled.div`
   margin: 0;
 `;
 
-export const ChatToggle = styled.div`
+export const ChatToggle = styled.button`
   position: absolute;
   display: flex;
   bottom: 20px;
