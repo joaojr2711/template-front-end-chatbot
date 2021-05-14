@@ -1,10 +1,16 @@
 import React from 'react';
 
+import { Container, ChatToggle } from './style';
+
+import { BiBot } from "react-icons/bi";
+
 const Chat: React.FC = () => {
   return (
-    <>
-      <h1>Chat Page</h1>
-    </>
+    <Container>
+      <ChatToggle>
+        <BiBot size={30}/>
+      </ChatToggle>
+    </Container>
   );
 };
 
