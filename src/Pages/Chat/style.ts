@@ -26,3 +26,17 @@ export const ChatToggle = styled.button`
     text-align: center;
   }
 `;
+
+export const ChatContainer = styled.button`
+  position: absolute;
+  display: flex;
+  bottom: 80px;
+  right: 20px;
+  width: 300px;
+  height: 500px;
+  background: ${props => props.theme.background};
+  border-radius: 10px;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);
+`;

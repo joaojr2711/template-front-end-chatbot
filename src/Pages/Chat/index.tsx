@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Container, ChatToggle } from './style';
+import { Container, ChatToggle, ChatContainer } from './style';
 
 import { BiBot, BiX } from "react-icons/bi";
 
@@ -12,6 +12,7 @@ const Chat: React.FC = () => {
 
   return (
     <Container>
+      {toggle && <ChatContainer />}
       <ChatToggle>
         {!toggle ? <BiBot size={30}/> : <BiX size={30}/>}
       </ChatToggle>
