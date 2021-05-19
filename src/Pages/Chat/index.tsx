@@ -7,14 +7,18 @@ import { BiBot, BiX } from "react-icons/bi";
 import { useChat } from "../../hooks/ChatContext";
 
 const Chat: React.FC = () => {
-  const { state } = useChat();
+  const { state, updateToggle } = useChat();
   const { toggle } = state;
+
+  const handleToggle = () => {
+    updateToggle(!toggle);
+  }
 
   return (
     <Container>
-      {toggle && <ChatContainer />}
-      <ChatToggle>
-        {!toggle ? <BiBot size={30}/> : <BiX size={30}/>}
+      {toggle &&  <ChatContainer /> }
+      <ChatToggle onClick={handleToggle}>
+        {!toggle ? <BiBot size={30} /> : <BiX size={30} />}
       </ChatToggle>
     </Container>
   );

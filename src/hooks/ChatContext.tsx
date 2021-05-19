@@ -2,6 +2,7 @@ import React, { createContext, useContext, useState, ReactNode } from "react";
 
 interface InitContextProps {
   state: ChatState;
+  updateToggle: (newState: boolean) => void;
 }
 
 interface Props {
@@ -19,9 +20,13 @@ const ChatProvider: React.FC<Props> = ({ children }) => {
     toggle: false,
   });
 
+  const updateToggle = async (newState: boolean) => {
+    await setState({ ...state, toggle: newState })
+  }
+
   return (
     <ChatContext.Provider
-      value={{ state }}
+      value={{ state, updateToggle }}
     >
       {children}
     </ChatContext.Provider>
