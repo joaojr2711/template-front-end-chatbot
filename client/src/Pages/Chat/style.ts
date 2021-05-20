@@ -101,3 +101,18 @@ export const FormChat = styled.form`
     }
   }
 `;
+
+export const FromWatson = styled.div`
+  padding-top: 12px;
+  padding-bottom: 12px;
+  float: right;
+
+  div {
+    float: right;
+  margin-right: 10px;
+  max-width: 100%;
+  margin-left: 90px;
+  }
+`;
+
+export const FromUser = styled.div``;

@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Container, ChatToggle, ChatContainer, ChatBody, ChatHeader, FormChat } from './style';
+import { sendMessage } from '../../common';
 
 import { BiBot, BiX } from "react-icons/bi";
 import { MdSend } from "react-icons/md";
@@ -25,8 +26,8 @@ const Chat: React.FC = () => {
           <ChatBody>
 
           </ChatBody>
-          <FormChat>
-            <input type="text" id="chat-input" autoComplete="off" placeholder="Enviar uma mensagem..." />
+          <FormChat onSubmit={e => sendMessage(e)} autoComplete="off">
+            <input type="text" id="chat-input" placeholder="Enviar uma mensagem..." />
             <button type="submit" id="chat-submit"><MdSend size={30}/></button>
           </FormChat>
         </ChatContainer>
