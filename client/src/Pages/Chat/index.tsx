@@ -9,11 +9,12 @@ import { MdSend } from "react-icons/md";
 import { useChat } from "../../hooks/ChatContext";
 
 const Chat: React.FC = () => {
-  const { state, updateToggle } = useChat();
+  const { state, updateToggle, createSession } = useChat();
   const { toggle } = state;
 
-  const handleToggle = () => {
-    updateToggle(!toggle);
+  const handleToggle = async () => {
+    await createSession();
+    await updateToggle(!toggle);
   }
 
   return (
