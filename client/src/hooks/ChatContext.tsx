@@ -5,6 +5,7 @@ interface InitContextProps {
   state: ChatState;
   updateToggle: (newState: boolean) => void;
   createSession: () => void;
+  updateChat: (payload: object, from: string) => void;
 }
 
 interface Props {
@@ -14,6 +15,12 @@ interface Props {
 interface ChatState {
   toggle: boolean;
   session_id: string;
+  messages: MessagesChat[];
+}
+
+interface MessagesChat {
+  payload: object;
+  from: string;
 }
 
 const ChatContext = createContext({} as InitContextProps);
@@ -22,6 +29,7 @@ const ChatProvider: React.FC<Props> = ({ children }) => {
   const [state, setState] = useState<ChatState>({
     toggle: false,
     session_id: '',
+    messages: [],
   });
 
   const updateToggle = async (newState: boolean) => {
@@ -35,13 +43,19 @@ const ChatProvider: React.FC<Props> = ({ children }) => {
     await setState({ ...state, session_id: session_id })
   }
 
-  return (
-    <ChatContext.Provider
-      value={{ state, updateToggle, createSession }}
-    >
-      {children}
-    </ChatContext.Provider>
-  );
+  const updateChat = (payload: object, from: string) => {
+    const { messages } = state;
+
+    messages.push(...messages, { payload: payload, from: from });
+}
+
+return (
+  <ChatContext.Provider
+    value={{ state, updateToggle, updateChat, createSession }}
+  >
+    {children}
+  </ChatContext.Provider>
+);
 };
 
 const useChat = () => {
