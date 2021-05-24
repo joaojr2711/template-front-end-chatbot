@@ -3,6 +3,12 @@ import styled from 'styled-components';
 export const Container = styled.div`
   padding: 0;
   margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+
+  p {
+    margin: 5px;
+    font-size: 14px;
+  }
 `;
 
 export const ChatToggle = styled.button`
@@ -50,16 +56,33 @@ export const ChatHeader = styled.div`
   padding: 0px;
   line-height: 55px;
   text-transform: uppercase;
-  font-family: sans-serif;
   font-size: 15px;
   color: ${props => props.theme.white};
 `;
 
 export const ChatBody = styled.div`
   position: relative;
+  overflow-y: scroll;
+  overflow-x: hidden;
   height: calc(90vh - 176px);
-  overflow: hidden;
   background-color: ${props => props.theme.third};
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: ${props => props.theme.gray};
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: ${props => props.theme.primary};
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: ${props => props.theme.primary};
+  }
 `;
 
 export const FormChat = styled.form`
@@ -103,16 +126,31 @@ export const FormChat = styled.form`
 `;
 
 export const FromWatson = styled.div`
-  padding-top: 12px;
-  padding-bottom: 12px;
-  float: right;
+  float: left;
+  width: 75%;
+  background: ${props => props.theme.primary};
+  margin: 8px;
+  padding: 8px;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
 
-  div {
-    float: right;
-  margin-right: 10px;
-  max-width: 100%;
-  margin-left: 90px;
+  p {
+    color: ${props => props.theme.white};
   }
 `;
 
-export const FromUser = styled.div``;
+export const FromUser = styled.div`
+  float: right;
+  width: 75%;
+  background: ${props => props.theme.white};
+  margin: 8px;
+  padding: 8px;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+
+  p {
+    color: ${props => props.theme.secundary};
+  }
+`;

@@ -4,5 +4,5 @@ export const themes = {
     secundary: '#393e46',
     third: '#fafafa',
     white: '#FFFFFF',
-
+    gray: '#eeeeee',
 }
