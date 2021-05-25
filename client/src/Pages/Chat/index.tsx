@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Container, ChatToggle, ChatContainer, ChatBody, ChatHeader, FormChat, FromWatson, FromUser } from './style';
+import LoadingWatson from '../../components/loading';
 
 import { BiBot, BiX } from "react-icons/bi";
 import { MdSend } from "react-icons/md";
@@ -37,6 +38,7 @@ const Chat: React.FC = () => {
               <FromWatson>
                   <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, recusandae voluptatem officiis sint praesentium facere vel non quibusdam modi totam fugiat nemo adipisci eveniet soluta quod fuga facilis suscipit molestias!</p>
               </FromWatson>
+              <LoadingWatson />
           </ChatBody>
           <FormChat autoComplete="off">
             <input type="text" id="chat-input" placeholder="Enviar uma mensagem..." />
