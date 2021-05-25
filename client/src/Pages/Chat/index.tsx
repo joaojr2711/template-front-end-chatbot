@@ -11,7 +11,7 @@ import { useChat } from "../../hooks/ChatContext";
 const Chat: React.FC = () => {
   const { state, updateToggle, createSession } = useChat();
 
-  const { toggle } = state;
+  const { toggle, loading } = state;
 
   const handleToggle = async () => {
     await createSession();
@@ -26,6 +26,7 @@ const Chat: React.FC = () => {
             Fale com o nosso assistente
             </ChatHeader>
           <ChatBody>
+            { loading && <LoadingWatson /> }
               <FromWatson>
                   <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, recusandae voluptatem officiis sint praesentium facere vel non quibusdam modi totam fugiat nemo adipisci eveniet soluta quod fuga facilis suscipit molestias!</p>
               </FromWatson>
@@ -38,7 +39,6 @@ const Chat: React.FC = () => {
               <FromWatson>
                   <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, recusandae voluptatem officiis sint praesentium facere vel non quibusdam modi totam fugiat nemo adipisci eveniet soluta quod fuga facilis suscipit molestias!</p>
               </FromWatson>
-              <LoadingWatson />
           </ChatBody>
           <FormChat autoComplete="off">
             <input type="text" id="chat-input" placeholder="Enviar uma mensagem..." />

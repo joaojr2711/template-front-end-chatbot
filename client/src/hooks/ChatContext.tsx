@@ -14,6 +14,7 @@ interface Props {
 
 interface ChatState {
   toggle: boolean;
+  loading: boolean;
   session_id: string;
   messages: MessagesChat[];
 }
@@ -28,6 +29,7 @@ const ChatContext = createContext({} as InitContextProps);
 const ChatProvider: React.FC<Props> = ({ children }) => {
   const [state, setState] = useState<ChatState>({
     toggle: false,
+    loading: true,
     session_id: '',
     messages: [],
   });
