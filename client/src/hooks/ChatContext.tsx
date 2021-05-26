@@ -1,4 +1,6 @@
-import React, { createContext, useContext, useState, ReactNode } from "react";
+import React, { createContext, useContext, useState, useCallback, ReactNode } from "react";
+import { v4 as uuidv4 } from "uuid";
+
 import api from "../services/api";
 
 interface InitContextProps {
@@ -20,6 +22,7 @@ interface ChatState {
 }
 
 interface MessagesChat {
+  id: string;
   payload: object;
   from: string;
 }
@@ -38,26 +41,41 @@ const ChatProvider: React.FC<Props> = ({ children }) => {
     await setState({ ...state, toggle: newState })
   }
 
-  const createSession = async () => {
+  const initSession = useCallback(async (session_id: string) => {
+    let payload = {
+      session_id: session_id,
+      input: {
+        text: '',
+      }
+    }
+
+    await api.post('message', payload)
+      .then(response => {
+        updateChat(response.data.output.generic[0], 'from-watson')
+      })
+  }, []);
+
+  const createSession = useCallback(async () => {
     const response = await api.get('session');
     const { session_id } = response.data;
 
-    await setState({ ...state, session_id: session_id })
-  }
+    await setState({ ...state, session_id: session_id });
+    await initSession(session_id);
+  }, []);
 
   const updateChat = (payload: object, from: string) => {
     const { messages } = state;
 
-    messages.push(...messages, { payload: payload, from: from });
-}
+    messages.push({ id: uuidv4(), payload: payload, from: from });
+  };
 
-return (
-  <ChatContext.Provider
-    value={{ state, updateToggle, updateChat, createSession }}
-  >
-    {children}
-  </ChatContext.Provider>
-);
+  return (
+    <ChatContext.Provider
+      value={{ state, updateToggle, updateChat, createSession }}
+    >
+      {children}
+    </ChatContext.Provider>
+  );
 };
 
 const useChat = () => {
