@@ -128,7 +128,9 @@ export const FormChat = styled.form`
 export const FromWatson = styled.div`
   float: left;
   width: 75%;
+  font-size: 14px;
   background: ${props => props.theme.primary};
+  color: ${props => props.theme.white};
   margin: 8px;
   padding: 8px;
   border-radius: 5px;
@@ -143,7 +145,9 @@ export const FromWatson = styled.div`
 export const FromUser = styled.div`
   float: right;
   width: 75%;
+  font-size: 14px;
   background: ${props => props.theme.white};
+  color: ${props => props.theme.secundary};
   margin: 8px;
   padding: 8px;
   border-radius: 5px;
