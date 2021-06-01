@@ -10,7 +10,17 @@ import { MdSend } from "react-icons/md";
 import { useChat } from "../../hooks/ChatContext";
 import api from '../../services/api';
 
-const DisplayOutputResponse: React.FC = ({ data }: object) => {
+interface OutputResponse {
+  data: object;
+}
+
+interface DataResponse {
+  id: string;
+  from: string;
+  payload: object;
+}
+
+const DisplayOutputResponse: React.FC<OutputResponse> = ({ data }) : DataResponse => {
   const { id, from, payload } = data;
 
   if (from === "from-watson") {
@@ -54,7 +64,6 @@ const Chat: React.FC = () => {
 
     await api.post('message', payload)
       .then(response => {
-        console.log({ response })
         updateChat(payload, 'from-user');
         updateChat(response.data.output.generic[0], 'from-watson')
       })
@@ -73,7 +82,7 @@ const Chat: React.FC = () => {
           </ChatHeader>
           <ChatBody>
             {
-              messages.length === 0 ? loading && <LoadingWatson /> : messages.map((msg) => <DisplayOutputResponse data={msg} />)
+              messages.length === 0 ? loading && <LoadingWatson /> : messages.map((msg, index) => <DisplayOutputResponse data={msg} key={index} />)
             }
           </ChatBody>
           <FormChat autoComplete="off" onSubmit={(e) => sendMessage(e)}>

@@ -1,8 +1,34 @@
 import React from 'react';
+import { useChat } from '../../hooks/ChatContext';
+import api from '../../services/api';
 
 import { ContainerButtons, ContainerMessage } from './style';
 
-const ButtonsWatson: React.FC = ({ id, title, options }) => {
+interface PropsButton {
+  id: string;
+  title: string;
+  options: array;
+}
+
+const ButtonsWatson: React.FC<PropsButton> = ({ id, title, options }) => {
+  const { state, updateChat } = useChat();
+
+  const handleClick = async (input: string) => {
+
+    let payload = {
+      session_id: state.session_id,
+      input: {
+        text: input,
+      }
+    }
+
+    await api.post('message', payload)
+      .then(response => {
+        updateChat(payload, 'from-user');
+        updateChat(response.data.output.generic[0], 'from-watson')
+    })
+  }
+
   return (
     <div key={id}>
       {
@@ -19,7 +45,7 @@ const ButtonsWatson: React.FC = ({ id, title, options }) => {
             <section>
               {
                 options.map((item: object, index: string) => (
-                  <button value={item.value.input.text} key={index}>{item.label}</button>
+                  <button value={item.label} onClick={() => handleClick(item.value.input.text)} key={index}>{item.label}</button>
                 ))
               }
             </section>
